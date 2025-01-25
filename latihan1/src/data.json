@@ -1,0 +1,27 @@
+[
+    {
+        "name": "Nabil Fadilah",
+        "gender": "Male",
+        "designation": "Programmer"
+    },
+    {
+        "name": "Nadia Putri",
+        "gender": "Female",
+        "designation": "Project Manager"
+    },
+    {
+        "name": "Nabila Putri",
+        "gender": "Female",
+        "designation": "UI/UX Design"
+    },
+    {
+        "name": "Johan Gulari",
+        "gender": "Male",
+        "designation": "Web Developer"
+    },
+    {
+        "name": "Sansan Daniala",
+        "gender": "Male",
+        "designation": "Fullstack Developer"
+    }
+]
