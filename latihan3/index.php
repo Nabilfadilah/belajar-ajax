@@ -16,21 +16,27 @@
 
 <body>
 
-    <h3>Latihan 2</h3>
+    <h3>Latihan 3</h3>
+
+    <!-- <input type="text" placeholder="Pencarian" id="keyword"> -->
 
     <button id="btn">Ambil Data</button>
 
-    <p>Menampilkan text ke browser : </p>
-    <li>Text: <strong id="result"></strong></li>
+    <li>Nama : <strong id="result"></strong></li>
 
     <script>
         function load_ajax() {
             // variabel ajax
             const ajax = new XMLHttpRequest() // objek ajax yang sudah tertanam di browser
 
+            // textnya akan diambil dari value yang dimasukan user
+            // let text = document.getElementById('keyword').value
+
             // memanggil metode open
-            // ('method', 'lokasi data text', asingkronus)
-            ajax.open('GET', 'src/data.txt', true)
+            // ('method', 'lokasi data text + keyword', asingkronus)
+            // kita bisa sambungkan bagian keyword dengan + string text nya
+            ajax.open('GET', 'src/data.php?keyword=doremi', true)
+            // ajax.open('GET', 'src/data.php?keyword=' + text, true)
 
             // uji kondisi dari objek ajax
             ajax.onreadystatechange = function() {
