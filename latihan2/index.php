@@ -16,12 +16,12 @@
 
 <body>
 
-    <h3>Latihan 1</h3>
-    <p>Menampilkan data json ke browser : </p>
-    <li>Nama: <strong id="result"></strong></li>
+    <h3>Latihan 2</h3>
 
-    <!-- menampilkan semua data -->
-    <!-- <ul id="result"></ul> -->
+    <button id="btn">Ambil Data</button>
+
+    <p>Menampilkan text ke browser : </p>
+    <li>Text: <strong id="result"></strong></li>
 
     <script>
         function load_ajax() {
@@ -29,36 +29,27 @@
             const ajax = new XMLHttpRequest() // objek ajax yang sudah tertanam di browser
 
             // memanggil metode open
-            // ('method', 'lokasi json', asingkronus)
-            ajax.open('GET', 'src/data.json', true)
+            // ('method', 'lokasi data text', asingkronus)
+            ajax.open('GET', 'src/data.txt', true)
 
             // uji kondisi dari objek ajax
             ajax.onreadystatechange = function() {
                 // menguji statusnya
                 // apakah requestnya sudah selesai/belum & status nya samadengan 200?
                 if (this.readyState === 4 && this.status === 200) {
-                    // parse data response  
-                    console.log('ajax berhasil dilakukan', JSON.parse(this.responseText));
-                    // simpan ke variabel data, sebagai data response yang sudah parse
-                    let data = JSON.parse(this.responseText)
 
                     // mengsisi element
-                    document.getElementById('result').textContent = data[0].name
-
-                    // Iterasi untuk menampilkan semua nama
-                    // let list = '';
-                    // data.forEach(item => {
-                    //     list += `<li>Nama: <strong>${item.name}</strong></li>`;
-                    // });
-
-                    // document.getElementById('result').innerHTML = list;
+                    document.getElementById('result').textContent = this.responseText // mengambil response text
                 }
             }
             // mengirimkan request ini 
             ajax.send();
         }
 
-        load_ajax();
+        // seleksi documentnya dan tambah eventnya
+        document.getElementById('btn').onclick = function() {
+            load_ajax();
+        };
     </script>
 
 </body>
