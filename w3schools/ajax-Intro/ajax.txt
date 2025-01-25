@@ -1,0 +1,465 @@
+Apa itu Ajax?
+
+AJAX = JavaScript dan XML Asinkron.
+AJAX adalah teknik untuk membuat halaman web yang cepat dan dinamis.
+
+AJAX memungkinkan halaman web diperbarui secara asinkron dengan bertukar sejumlah kecil data dengan server di balik layar. Ini berarti memungkinkan untuk memperbarui bagian-bagian halaman web, tanpa memuat ulang seluruh halaman.
+Halaman web klasik (yang tidak menggunakan AJAX) harus memuat ulang seluruh halaman jika kontennya berubah.
+
+Contoh aplikasi yang menggunakan AJAX: Google Maps, Gmail, Youtube, dan tab Facebook.
+
+AJAX Berbasis Standar Internet
+AJAX didasarkan pada standar internet, dan menggunakan kombinasi:
+- Objek XMLHttpRequest (untuk bertukar data secara asinkron dengan server)
+- JavaScript/DOM (untuk menampilkan/berinteraksi dengan informasi)
+- CSS (untuk memberi gaya pada data)
+- XML (sering digunakan sebagai format untuk mentransfer data)
+
+Sejarah Ajax
+AJAX dipopulerkan pada tahun 2005 oleh Google, dengan Google Suggest.
+Google Suggest menggunakan AJAX untuk membuat antarmuka web yang sangat dinamis: Saat Anda mulai mengetik di kotak pencarian Google, JavaScript mengirimkan huruf-huruf tersebut ke server dan server mengembalikan daftar saran.
+----------------
+
+AJAX - The XMLHttpRequest Object
+
+Inti dari AJAX adalah objek XMLHttpRequest.
+
+Semua browser modern mendukung objek XMLHttpRequest.
+Objek XMLHttpRequest dapat digunakan untuk bertukar data dengan server web di balik layar. Ini berarti Anda dapat memperbarui bagian-bagian halaman web tanpa harus memuat ulang seluruh halaman.
+
+Membuat Objek XMLHttpRequest
+Semua browser modern (Chrome, Firefox, IE7+, Edge, Safari, Opera) memiliki objek XMLHttpRequest bawaan. Sintaks untuk membuat objek XMLHttpRequest
+variable = new XMLHttpRequest();
+
+Access Across Domains
+Demi alasan keamanan, peramban modern tidak mengizinkan akses lintas domain. 
+Ini berarti bahwa halaman web dan berkas XML yang coba dimuat harus berada di server yang sama.
+Semua contoh di W3Schools membuka berkas XML yang terletak di domain W3Schools. 
+Jika Anda ingin menggunakan contoh di atas di salah satu halaman web Anda sendiri, berkas XML yang Anda muat harus berada di server Anda sendiri.
+
+Browser lama (IE5 dan IE6)
+Internet Explorer versi lama (5/6) menggunakan objek ActiveX, bukan objek XMLHttpRequest:
+variable = new ActiveXObject("Microsoft.XMLHTTP");
+
+Untuk menangani IE5 dan IE6, periksa apakah browser mendukung objek XMLHttpRequest, atau buat objek ActiveX:
+
+1. XMLHttpRequest Object Methods
+
+- new XMLHttpRequest()
+  Membuat objek XMLHttpRequest baru.
+
+- abort()
+  Membatalkan permintaan yang sedang berjalan.
+
+- getAllResponseHeaders()
+  Mengembalikan informasi header.
+
+- getResponseHeader()
+  Mengembalikan informasi header tertentu.
+
+- open(method, url, async, user, psw)
+  Menentukan permintaan:
+    method: tipe permintaan GET atau POST.
+    url: lokasi file.
+    async: true (asinkron) atau false (sinkron).
+    user: nama pengguna (opsional).
+    psw: kata sandi (opsional).
+    send()
+    Mengirimkan permintaan ke server.
+    Digunakan untuk permintaan GET.
+
+- send(string)
+  Mengirimkan permintaan ke server.
+  Digunakan untuk permintaan POST.
+
+- setRequestHeader()
+  Menambahkan pasangan label/nilai ke header yang akan dikirimkan.
+
+2. XMLHttpRequest Object Properties
+
+- onreadystatechange
+  Mendefinisikan fungsi yang akan dipanggil saat properti readyState berubah.
+
+- readyState
+  Menyimpan status dari XMLHttpRequest:
+    0: permintaan belum diinisialisasi.
+    1: koneksi ke server telah dibuat.
+    2: permintaan diterima.
+    3: permintaan sedang diproses.
+    4: permintaan selesai, dan respons siap.
+
+- responseText
+  Mengembalikan data respons sebagai string.
+
+- responseXML
+  Mengembalikan data respons sebagai data XML.
+
+- status
+  Mengembalikan nomor status dari permintaan:
+    200: "OK".
+    403: "Forbidden".
+    404: "Not Found".
+    (Lihat daftar lengkap di referensi Http Messages).
+
+- statusText
+  Mengembalikan teks status (contoh: "OK" atau "Not Found").
+----------------------------
+
+AJAX - Send a Request ke Server
+
+Objek XMLHttpRequest digunakan untuk bertukar data dengan server.
+
+Untuk mengirim permintaan ke server, kami menggunakan metode open() dan send() dari objek XMLHttpRequest:
+xhttp.open("GET", "ajax_info.txt", true);
+xhttp.send();
+
+method:
+- open(method, url, async) = menentukan jenis permintaan
+  method: jenis permintaan: GET atau POST 
+  url: lokasi server (file) 
+  async: benar (asinkron) atau salah (sinkron)
+- send() = Mengirim permintaan ke server (digunakan untuk GET)
+- send(string) = Mengirim permintaan ke server (digunakan untuk POST)
+
+GET atau POST?
+GET lebih sederhana dan lebih cepat daripada POST, dan dapat digunakan dalam banyak kasus. 
+Namun, selalu gunakan permintaan POST saat:
+    - File yang di-cache bukanlah suatu pilihan (perbarui file atau database di server).
+    - Mengirim data dalam jumlah besar ke server (POST tidak memiliki batasan ukuran).
+    - Mengirim input pengguna (yang dapat berisi karakter yang tidak diketahui), POST lebih kuat dan aman dibandingkan GET.
+
+//GET Request
+
+permintaan GET sederhana:
+contoh:
+xhttp.open("GET", "demo_get.asp", true);
+xhttp.send();
+code : (index2.php)
+
+Dalam contoh di atas, Anda mungkin mendapatkan hasil yang di-cache. Untuk menghindari hal ini, tambahkan ID unik ke URL:
+contoh:
+xhttp.open("GET", "demo_get.asp?t=" + Math.random(), true);
+xhttp.send();
+code : (index3.php) 
+
+Jika Anda ingin mengirim informasi dengan metode GET, tambahkan informasi ke URL:
+contoh:
+xhttp.open("GET", "demo_get2.asp?fname=Henry&lname=Ford", true);
+xhttp.send();
+
+//POST Request
+permintaan POST sederhana
+
+contoh:
+xhttp.open("POST", "demo_post.asp", true);
+xhttp.send();
+code : (index4.php)
+
+Untuk POST data seperti formulir HTML, tambahkan header HTTP dengan setRequestHeader(). Tentukan data yang ingin Anda kirim dalam metode send():
+contoh:
+xhttp.open("POST", "ajax_test.asp", true);
+xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+xhttp.send("fname=Henry&lname=Ford");
+code : (index5.php)
+
+method: 
+setRequestHeader(header, value) = Menambahkan header HTTP ke permintaan
+header: menentukan nama header 
+value: menentukan nilai header
+
+//Url - Sebuah File di Server
+Parameter url dari metode open() adalah alamat ke file di server:
+xhttp.open("GET", "ajax_test.asp", true);
+
+Berkas tersebut dapat berupa berkas apa pun, seperti .txt dan .xml, atau berkas skrip server seperti .asp dan .php (yang dapat melakukan tindakan pada server sebelum mengirimkan respons kembali).
+
+//Asynchronous - True atau False?
+Permintaan server harus dikirim secara asinkron. 
+Parameter async dari metode open() harus disetel ke true:
+xhttp.open("GET", "ajax_test.asp", true);
+
+Dengan mengirim secara asinkron, JavaScript tidak perlu menunggu respons server, tetapi dapat: 
+    - mengeksekusi skrip lain sambil menunggu respons server 
+    - menangani respons setelah respons siap
+
+//Properti onreadystatechange
+Dengan objek XMLHttpRequest, Anda dapat menentukan fungsi yang akan dijalankan saat permintaan menerima jawaban. 
+Fungsi ini ditentukan dalam properti onreadystatechange dari objek XMLHttpResponse:
+contoh:
+xhttp.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    document.getElementById("demo").innerHTML = this.responseText;
+  }
+};
+xhttp.open("GET", "ajax_info.txt", true);
+xhttp.send();
+code : (index6.php)
+
+Anda akan mempelajari lebih lanjut tentang onreadystatechange di bab berikutnya.
+
+//Synchronous Request
+Untuk menjalankan permintaan sinkron, ubah parameter ketiga dalam metode open() menjadi false:
+xhttp.open("GET", "ajax_info.txt", false);
+
+Terkadang async = false digunakan untuk pengujian cepat. Anda juga akan menemukan permintaan sinkron dalam kode JavaScript lama. 
+Karena kode akan menunggu penyelesaian server, tidak diperlukan fungsi onreadystatechange:
+contoh:
+xhttp.open("GET", "ajax_info.txt", false);
+xhttp.send();
+document.getElementById("demo").innerHTML = xhttp.responseText;
+code : (index7.php)
+----------------------------
+
+AJAX - Server Response
+
+//properti onreadystatechange 
+
+Properti readyState menyimpan status XMLHttpRequest. 
+Properti onreadystatechange mendefinisikan fungsi yang akan dieksekusi saat readyState berubah.
+Properti status dan properti statusText menyimpan status objek XMLHttpRequest.
+
+property:
+- onreadystatechange = Menentukan fungsi yang akan dipanggil saat properti readyState berubah
+- readyState = Menyimpan status XMLHttpRequest. 
+    0: permintaan belum diinisialisasi 
+    1: koneksi server dibuat 
+    2: permintaan diterima 
+    3: memproses permintaan 
+    4: permintaan selesai dan respons siap
+- status = 200: "OK", 403: "Forbidden", 404: "Page not found"
+- statusText = Mengembalikan teks status (misalnya "OK" or "Not Found")
+
+Fungsi onreadystatechange dipanggil setiap kali readyState berubah. 
+Saat readyState bernilai 4 dan statusnya 200, responsnya siap:
+contoh:
+function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("demo").innerHTML =
+      this.responseText;
+    }
+  };
+  xhttp.open("GET", "ajax_info.txt", true);
+  xhttp.send();
+}
+code : (index8.php)
+
+//Menggunakan Callback Function
+
+Fungsi panggilan balik adalah fungsi yang dilewatkan sebagai parameter ke fungsi lain.
+Jika Anda memiliki lebih dari satu tugas AJAX di situs web, Anda harus membuat satu fungsi untuk mengeksekusi objek XMLHttpRequest, dan satu fungsi panggilan balik untuk setiap tugas AJAX.
+The function call should contain the URL and what function to call when the response is ready.
+contoh:
+loadDoc("url-1", myFunction1);
+
+loadDoc("url-2", myFunction2);
+
+function loadDoc(url, cFunction) {
+  var xhttp;
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      cFunction(this);
+    }
+  };
+  xhttp.open("GET", url, true);
+  xhttp.send();
+}
+
+function myFunction1(xhttp) {
+  // action goes here
+}
+function myFunction2(xhttp) {
+  // action goes here
+}
+
+//Server Response Properties
+property:
+- responseText = dapatkan data respons sebagai string
+- responseXML = dapatkan data respons sebagai XML data
+
+//Server Response Methods
+method:
+- getResponseHeader() = Mengembalikan informasi header spesifik dari server resource
+- getAllResponseHeaders() = Mengembalikan semua informasi header dari server resource
+
+//Property responseText
+Properti responseText mengembalikan respons server sebagai string JavaScript, dan Anda dapat menggunakannya sebagaimana mestinya:
+contoh:
+document.getElementById("demo").innerHTML = xhttp.responseText;
+code : (index9.php)
+
+//Properti responseXML
+Objek XMLHttpRequest memiliki parser XML bawaan. 
+Properti responseXML mengembalikan respons server sebagai objek XML DOM. 
+Dengan menggunakan properti ini, Anda dapat mengurai respons sebagai objek XML DOM:
+contoh:
+xmlDoc = xhttp.responseXML;
+txt = "";
+x = xmlDoc.getElementsByTagName("ARTIST");
+for (i = 0; i < x.length; i++) {
+  txt += x[i].childNodes[0].nodeValue + "<br>";
+}
+document.getElementById("demo").innerHTML = txt;
+xhttp.open("GET", "cd_catalog.xml", true);
+xhttp.send();
+code : (index10.php)
+
+//Metode getAllResponseHeaders()
+Metode getAllResponseHeaders() mengembalikan semua informasi header dari respons server.
+contoh:
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    document.getElementById("demo").innerHTML =
+    this.getAllResponseHeaders();
+  }
+};
+code : (index11.php)
+
+//Method getResponseHeader()
+Metode getResponseHeader() mengembalikan informasi header spesifik dari respons server.
+contoh:
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    document.getElementById("demo").innerHTML =
+    this.getResponseHeader("Last-Modified");
+  }
+};
+xhttp.open("GET", "ajax_info.txt", true);
+xhttp.send();
+code : (index12.php)
+-------------------------------
+
+Ajax XML Example
+AJAX dapat digunakan untuk komunikasi interaktif dengan berkas XML.
+
+//Ajax XML Example
+Contoh berikut akan menunjukkan bagaimana halaman web dapat mengambil informasi dari file XML dengan AJAX:
+button Get CD info
+code : (index13.php)
+
+//Example Explained
+Ketika pengguna mengklik tombol "Dapatkan info CD" di atas, fungsi loadDoc() dijalankan.
+Fungsi loadDoc() membuat objek XMLHttpRequest, menambahkan fungsi yang akan dieksekusi saat respons server siap, dan mengirimkan permintaan ke server.
+
+Ketika respons server sudah siap, tabel HTML dibuat, node (elemen) diekstraksi dari file XML, dan akhirnya memperbarui elemen "demo" dengan tabel HTML yang diisi dengan data XML:
+function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+    myFunction(this);
+    }
+  };
+  xhttp.open("GET", "cd_catalog.xml", true);
+  xhttp.send();
+}
+function myFunction(xml) {
+  var i;
+  var xmlDoc = xml.responseXML;
+  var table="<tr><th>Artist</th><th>Title</th></tr>";
+  var x = xmlDoc.getElementsByTagName("CD");
+  for (i = 0; i <x.length; i++) {
+    table += "<tr><td>" +
+    x[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue +
+    "</td><td>" +
+    x[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue +
+    "</td></tr>";
+  }
+  document.getElementById("demo").innerHTML = table;
+}
+
+//XML File
+Berkas XML yang digunakan dalam contoh di atas tampak seperti ini: "cd_catalog.xml".
+-------------------------------
+
+AJAX PHP Example
+AJAX digunakan untuk membuat aplikasi yang lebih interaktif.
+
+//AJAX PHP Example
+Contoh berikut menunjukkan bagaimana halaman web dapat berkomunikasi dengan server web saat pengguna mengetik karakter di kolom input:
+
+contoh:
+Start typing a name in the input field below:
+Suggestions:
+First name: 
+form input
+
+//example Explained
+Dalam contoh di atas, saat pengguna mengetik karakter di kolom input, fungsi yang disebut showHint() akan dijalankan. 
+Fungsi ini dipicu oleh peristiwa onkeyup. 
+Berikut ini kode HTML-nya:
+code : (index14.php)
+
+//File PHP - "gethint.php"
+File PHP memeriksa serangkaian nama, dan mengembalikan nama yang sesuai ke browser
+
+contoh code di website W3Schools
+-------------------------------------
+
+AJAX ASP Example
+Contoh berikut akan menunjukkan bagaimana halaman web dapat berkomunikasi dengan server web saat pengguna mengetik karakter di kolom input:
+contoh:
+Start typing a name in the input field below:
+Suggestions:
+First name: 
+form input
+
+Dalam contoh di atas, saat pengguna mengetik karakter di kolom input, fungsi yang disebut showHint() akan dijalankan. 
+Fungsi ini dipicu oleh peristiwa onkeyup. 
+Berikut ini kode HTML-nya:
+code : (index15.php)
+
+File ASP - "gethint.asp" 
+File ASP memeriksa serangkaian nama, dan mengembalikan nama yang sesuai ke browser:
+
+contoh code di website W3Schools
+------------------------------------
+
+AJAX Database Example
+
+Contoh berikut akan menunjukkan bagaimana halaman web dapat mengambil informasi dari database dengan AJAX:
+contoh:
+code : (index16.php)
+
+//Example Explained - Fungsi showCustomer()
+Saat pengguna memilih pelanggan dalam daftar dropdown di atas, fungsi yang disebut showCustomer() akan dijalankan. Fungsi ini dipicu oleh peristiwa onchange:
+contoh code di website W3Schools
+
+Halaman pada server yang dipanggil oleh JavaScript di atas adalah file PHP yang disebut "getcustomer.php". 
+Kode sumber dalam "getcustomer.php" menjalankan kueri terhadap database, dan mengembalikan hasilnya dalam tabel HTML:
+
+contoh code di website W3Schools
+------------------------------------
+
+XML Applications
+
+Bab ini menunjukkan beberapa aplikasi HTML yang menggunakan XML, HTTP, DOM, dan JavaScript.
+
+//XML Document yang digunakan
+Dalam bab ini kita akan menggunakan file XML yang disebut "cd_catalog.xml"(cek di W3Schools).
+
+//Menampilkan Data XML dalam Tabel HTML
+Contoh ini mengulang setiap elemen <CD> dan menampilkan nilai elemen <ARTIST> dan <TITLE> dalam tabel HTML:
+contoh:
+code : (index17.php)
+
+//Menampilkan CD Pertama dalam Elemen div HTML
+Contoh ini menggunakan fungsi untuk menampilkan elemen CD pertama dalam elemen HTML dengan id="showCD":
+
+contoh:
+code : (index18.php)
+
+//Navigate antar CD
+Untuk menavigasi antar CD pada contoh di atas, buat fungsi next() dan previous():
+
+contoh:
+code : (index19.php)
+
+//Tampilkan Informasi Album Saat Mengklik CD
+Contoh terakhir menunjukkan bagaimana Anda dapat menampilkan informasi album saat pengguna mengklik CD:
+contoh:
+code : (index20.php)
+---------------------------------------
