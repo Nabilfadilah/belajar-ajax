@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Nabil Fadilah",
+        "gender": "Male",
+        "designation": "Programmer",
+        "address": "Bandung"
+    },
+    {
+        "name": "Nadia Putri",
+        "gender": "Female",
+        "designation": "Project Manager",
+        "address": "Bandung"
+    },
+    {
+        "name": "Nabila Putri",
+        "gender": "Female",
+        "designation": "UI/UX Design",
+        "address": "Bandung"
+    },
+    {
+        "name": "Johan Gulari",
+        "gender": "Male",
+        "designation": "Web Developer",
+        "address": "Bandung"
+    },
+    {
+        "name": "Sansan Daniala",
+        "gender": "Male",
+        "designation": "Fullstack Developer",
+        "address": "Bandung"
+    }
+]
