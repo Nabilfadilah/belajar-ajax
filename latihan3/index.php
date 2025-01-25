@@ -18,7 +18,7 @@
 
     <h3>Latihan 3</h3>
 
-    <!-- <input type="text" placeholder="Pencarian" id="keyword"> -->
+    <input type="text" placeholder="Pencarian" id="keyword">
 
     <button id="btn">Ambil Data</button>
 
@@ -30,13 +30,12 @@
             const ajax = new XMLHttpRequest() // objek ajax yang sudah tertanam di browser
 
             // textnya akan diambil dari value yang dimasukan user
-            // let text = document.getElementById('keyword').value
+            let text = document.getElementById('keyword').value
 
             // memanggil metode open
             // ('method', 'lokasi data text + keyword', asingkronus)
             // kita bisa sambungkan bagian keyword dengan + string text nya
-            ajax.open('GET', 'src/data.php?keyword=doremi', true)
-            // ajax.open('GET', 'src/data.php?keyword=' + text, true)
+            ajax.open('GET', 'src/data.php?keyword=' + text, true)
 
             // uji kondisi dari objek ajax
             ajax.onreadystatechange = function() {
