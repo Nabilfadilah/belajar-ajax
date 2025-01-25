@@ -22,7 +22,8 @@
 
     <button id="btn">Ambil Data</button>
 
-    <li>Nama : <strong id="result"></strong></li>
+    <!-- <li>Nama : <strong id="result"></strong></li> -->
+    <li id="result"></li>
 
     <script>
         function load_ajax() {
@@ -44,7 +45,8 @@
                 if (this.readyState === 4 && this.status === 200) {
 
                     // mengsisi element
-                    document.getElementById('result').textContent = this.responseText // mengambil response text
+                    // document.getElementById('result').textContent = this.responseText // mengambil response text
+                    document.getElementById('result').innerHTML = this.responseText // mengambil response text
                 }
             }
             // mengirimkan request ini 
