@@ -1,3 +1,4 @@
 <?php
 
-echo "Hi, ajax";
+// terima data keywordnya
+echo $_GET['keyword'];
