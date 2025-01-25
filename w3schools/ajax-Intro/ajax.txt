@@ -146,6 +146,7 @@ Jika Anda ingin mengirim informasi dengan metode GET, tambahkan informasi ke URL
 contoh:
 xhttp.open("GET", "demo_get2.asp?fname=Henry&lname=Ford", true);
 xhttp.send();
+code : (index3-2.php)
 
 //POST Request
 permintaan POST sederhana
