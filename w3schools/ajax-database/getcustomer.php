@@ -1,7 +1,13 @@
 <?php
-$mysqli = new mysqli("servername", "username", "password", "dbname");
+// $mysqli = new mysqli("servername", "username", "password", "dbname");
+// if ($mysqli->connect_error) {
+//     exit('Could not connect');
+// }
+
+// koneksi ke database
+$mysqli = new mysqli("localhost", "root", "", "ajaxdb");
 if ($mysqli->connect_error) {
-    exit('Could not connect');
+    exit('Could not connect: ' . $mysqli->connect_error);
 }
 
 $sql = "SELECT customerid, companyname, contactname, address, city, postalcode, country
@@ -15,21 +21,25 @@ $stmt->bind_result($cid, $cname, $name, $adr, $city, $pcode, $country);
 $stmt->fetch();
 $stmt->close();
 
+// table
 echo "<table>";
 echo "<tr>";
 echo "<th>CustomerID</th>";
-echo "<td>" . $cid . "</td>";
 echo "<th>CompanyName</th>";
-echo "<td>" . $cname . "</td>";
 echo "<th>ContactName</th>";
-echo "<td>" . $name . "</td>";
 echo "<th>Address</th>";
-echo "<td>" . $adr . "</td>";
 echo "<th>City</th>";
-echo "<td>" . $city . "</td>";
 echo "<th>PostalCode</th>";
-echo "<td>" . $pcode . "</td>";
 echo "<th>Country</th>";
+echo "</tr>";
+
+echo "<tr>";
+echo "<td>" . $cid . "</td>";
+echo "<td>" . $cname . "</td>";
+echo "<td>" . $name . "</td>";
+echo "<td>" . $adr . "</td>";
+echo "<td>" . $city . "</td>";
+echo "<td>" . $pcode . "</td>";
 echo "<td>" . $country . "</td>";
 echo "</tr>";
 echo "</table>";
